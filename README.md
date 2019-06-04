@@ -52,6 +52,23 @@ $ sudo docker-compose up -d
 
 Your own private RequestBin will be running on this server.
 
+Misc
+====
+
+## Extend the lifetime of a bin
+
+By default bins expire 2 days after creation.  You can examine/manipulate the expiration
+for redis-backed bins as follows:
+
+```
+# Find out how much time is left
+docker exec -it requestbin_redis_1 redis-cli ttl requestbin_xxxxxxxx
+(integer) 83601
+
+# Change the expiration to 30 days from now
+docker exec -it requestbin_redis_1 redis-cli expire requestbin_xxxxxxxx 2592000
+(integer) 1
+```
 
 Contributors
 ------------
